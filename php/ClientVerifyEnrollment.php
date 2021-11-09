@@ -11,5 +11,3 @@ if(isset($correo)){
         $valido=False;
     }
 }
-
-?>
