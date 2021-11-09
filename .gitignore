@@ -2,3 +2,8 @@ xml/
 json/
 images/
 php/DbConfig.php
+.prettierrc.json
+node_modules/
+package-lock.json
+package.json
+.eslintrc.js
