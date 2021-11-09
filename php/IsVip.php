@@ -13,12 +13,12 @@
             <input type="submit" value="Es VIP?">
         </form>
         <div id="esVipResponse">
-            
+
         </div>
     </section>
     <?php include '../html/Footer.html' ?>
     </body>
 </html>
 <?php
-
+    
 ?>
