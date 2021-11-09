@@ -135,7 +135,9 @@
                 echo "<br>";
             }
             else{
-              //Si no ha habido ningún error, se registra al usuario
+              include 'ClientVerifyEnrollment.php';
+              if($response=='SI'){
+                //Si no ha habido ningún error, se registra al usuario
               //Conectamos con la base de datos mysql
               include 'DbConfig.php';
               $conn = mysqli_connect($server, $user, $pass, $basededatos);
@@ -158,6 +160,12 @@
                         window.location.href="LogIn.php";
                         </script>';        
               }
+              }else{
+                echo "el correo no esta matriculado en la UPV";
+              }
+              echo "JFSALFJDSKA";
+
+              
             }
         }
     ?>
