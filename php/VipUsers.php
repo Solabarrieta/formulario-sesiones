@@ -36,7 +36,7 @@ switch ($method) {
         }
         break;
     case 'POST':
-        // Para añadir VIPS
+
     case 'PUT':
         // Este no hay que implementar
     case 'DELETE':
