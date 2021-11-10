@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
+    $vip;
     function viewVips(){
         echo $id;  
         $curl = curl_init();
@@ -9,6 +10,7 @@
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
         $vip = curl_exec($curl);
+        return $vip;
         echo $vip;
     }
     if(isset($_GET['run'])){
@@ -31,7 +33,7 @@
         <a href="ShowVips.php?run=true">view changes</a>
         <div id="esVipResponse">
             <p><?php
-            echo $vip;
+            echo "'.$vip.'";
             ?></p>
         </div>
     </section>
