@@ -38,7 +38,7 @@ switch ($method) {
     case 'POST':
         $id = file_get_contents('php://input');
         $sql = "INSERT INTO vips (email) VALUES ('$id')";
-        $num = Database::EjecutarNoConsulta($cnx, $sql);
+        $respuesta = Database::EjecutarNoConsulta($cnx, $sql);
 
         if ($num == 0) {
             echo "Este usuario ya es VIP";
@@ -51,5 +51,14 @@ switch ($method) {
         // Este no hay que implementar
     case 'DELETE':
         // Borrado de usuario VIP
+        $id = file_get_contents('php://input');
+        $sql = "DELETE FROM vips WHERE email = '$id'";
+        $respuesta = Database::EjecutarNoConsulta($cnx, $sql);
+
+        if ($respuesta == 0) {
+            echo "El usuario " . $vip . " esta en la lista de los VIPS";
+        } else {
+            echo json_encode(array('Deleted VIP ' => $id));
+        }
 }
 Database::Desconectar($cnx);
