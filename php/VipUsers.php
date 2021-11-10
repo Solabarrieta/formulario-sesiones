@@ -36,6 +36,16 @@ switch ($method) {
         }
         break;
     case 'POST':
+        $id = file_get_contents('php://input');
+        $sql = "INSERT INTO vips (email) VALUES ('$id')";
+        $num = Database::EjecutarNoConsulta($cnx, $sql);
+
+        if ($num == 0) {
+            echo "Este usuario ya es VIP";
+        } else {
+            echo json_encode(array('insertedVIP' => $id));
+        }
+
 
     case 'PUT':
         // Este no hay que implementar
