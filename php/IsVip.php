@@ -21,7 +21,7 @@
             echo $id;
             
             $curl = curl_init();
-            $url = "localhost:3000/php/VipUsers.php?id=" . $id;
+            $url = "http://localhost/SW-API/php/VipUsers.php?id=" . $id;
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
