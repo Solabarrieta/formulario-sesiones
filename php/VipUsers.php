@@ -2,10 +2,10 @@
 // Constantes para el acceso a datos...
 //phpinfo();
 DEFINE("_HOST_", "localhost");
-DEFINE("_PORT_", "");
-DEFINE("_USERNAME_", "Oier");
-DEFINE("_DATABASE_", "Quiz");
-DEFINE("_PASSWORD_", "4258");
+DEFINE("_PORT_", "3306");
+DEFINE("_USERNAME_", "root");
+DEFINE("_DATABASE_", "db_G22");
+DEFINE("_PASSWORD_", "2000");
 
 require_once 'database.php';
 $method = $_SERVER['REQUEST_METHOD'];
@@ -19,7 +19,7 @@ switch ($method) {
             $id = $_GET['id'];
             $sql = "SELECT * FROM vips WHERE email='$id'";
             $data = Database::EjecutarConsulta($cnx, $sql);
-            if (isset($data[0])) {
+            if ($id==1) {
                 echo "<br><br><b>ENHORABUENA " . $id . " ES VIP</b><br><img src=../images/ok.gif>";
                 break;
             } else {

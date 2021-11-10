@@ -1,9 +1,3 @@
-<?php
-    include 'database.php';
-    $curl=curl_init();
-    $url='https:localhost/Formulario-API';
-    
-?>
 <!DOCTYPE html>
 <html>
 
@@ -22,13 +16,26 @@
         </form>
         <div id="esVipResponse">
             <?php
+            echo "hola";
             $curl = curl_init();
-            $url = "https://localhost/formulario-api/vipusers";
-            curl_setopt($curl, CURLOPT_URL, $url);
+            //vipusers.php?id=$1
+            $url = "http://localhost/vipusers/";
+            curl_setopt($curl, CURLOPT_URL, $url); 
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            $vip = curl_exec($curl);
+            curl_exec($curl);
+            curl_close($curl);
+            echo "Solucion: ";
             echo $vip;
+            /*
+            $url="http://localhost/test.php";
+            $handle = curl_init($url);
+            curl_setopt($handle, CURLOPT_POST, true);
+            curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
+            curl_exec($handle);
 
+            echo '<br>esto';
+            echo $vip;
+            */
             ?>
 
         </div>
