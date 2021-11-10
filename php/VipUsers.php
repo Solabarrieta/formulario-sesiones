@@ -3,23 +3,23 @@
 //phpinfo();
 DEFINE("_HOST_", "localhost");
 DEFINE("_PORT_", "3306");
-DEFINE("_USERNAME_", "Oier");
+DEFINE("_USERNAME_", "oier");
 DEFINE("_DATABASE_", "Quiz");
 DEFINE("_PASSWORD_", "4258");
 
 require_once 'database.php';
-$method = $_SERVER['REQUEST_METHOD'];
-$resource = $_SERVER['REQUEST_URI'];
+$method = strtoupper($_SERVER['REQUEST_METHOD']);
+//$resource = $_SERVER['REQUEST_URI'];
 
 $cnx = Database::Conectar();
 switch ($method) {
     case 'GET':
         if (isset($_GET['id'])) {
             $datos = "";
-            $id = file_get_contents('php://input');
+            $id = $_GET['id'];
             $sql = "SELECT * FROM vips WHERE email='$id'";
             $data = Database::EjecutarConsulta($cnx, $sql);
-            if (isset($data[0])) {
+            if (!empty($data)) {
                 echo "<br><br><b>ENHORABUENA " . $id . " ES VIP</b><br>";
                 break;
             } else {
