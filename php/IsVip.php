@@ -11,31 +11,27 @@
         <h2>Cliente REST para saber si el usuario dado es VIP</h2>
         <form action="" method="post">
             <h1>Es VIP?</h1>
-            <input type="text">
-            <input type="submit" value="Es VIP?">
+            <input name="id" type="text">
+            <input id="form-button" name="form-button" type="submit" value="Es VIP?">
         </form>
         <div id="esVipResponse">
             <?php
-            echo "hola";
-            $curl = curl_init();
-            //vipusers.php?id=$1
-            $url = "http://localhost/vipusers/";
-            curl_setopt($curl, CURLOPT_URL, $url); 
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_exec($curl);
-            curl_close($curl);
-            echo "Solucion: ";
-            echo $vip;
-            /*
-            $url="http://localhost/test.php";
-            $handle = curl_init($url);
-            curl_setopt($handle, CURLOPT_POST, true);
-            curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
-            curl_exec($handle);
+            if (isset($_POST['form-button'])) {
+                $id = $_POST['id'];
+                echo $id . PHP_EOL;
+                $curl = curl_init();
+                $url = "http://localhost/~oier/formulario-api/php/VipUsers.php?id=" . $id;
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                //curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+                $vip = curl_exec($curl);
 
-            echo '<br>esto';
-            echo $vip;
-            */
+                if (empty($vip)) {
+                    echo 'No hay nada!' . PHP_EOL;
+                } else {
+                    echo $vip;
+                }
+            }
             ?>
 
         </div>

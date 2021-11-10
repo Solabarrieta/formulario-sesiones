@@ -8,8 +8,8 @@ DEFINE("_DATABASE_", "db_G22");
 DEFINE("_PASSWORD_", "2000");
 
 require_once 'database.php';
-$method = $_SERVER['REQUEST_METHOD'];
-$resource = $_SERVER['REQUEST_URI'];
+$method = strtoupper($_SERVER['REQUEST_METHOD']);
+//$resource = $_SERVER['REQUEST_URI'];
 
 $cnx = Database::Conectar();
 switch ($method) {
@@ -19,11 +19,11 @@ switch ($method) {
             $id = $_GET['id'];
             $sql = "SELECT * FROM vips WHERE email='$id'";
             $data = Database::EjecutarConsulta($cnx, $sql);
-            if ($id==1) {
-                echo "<br><br><b>ENHORABUENA " . $id . " ES VIP</b><br><img src=../images/ok.gif>";
+            if (!empty($data)) {
+                echo "<br><br><b>ENHORABUENA " . $id . " ES VIP</b><br>";
                 break;
             } else {
-                echo "<br><br><b>LO SIENTO " . $id . " NO ES VIP</b><br><img src=../images/mal.gif>";
+                echo "<br><br><b>LO SIENTO " . $id . " NO ES VIP</b><br>";
                 break;
             }
         } else {
@@ -36,7 +36,7 @@ switch ($method) {
         }
         break;
     case 'POST':
-        // Para añadir VIPS
+
     case 'PUT':
         // Este no hay que implementar
     case 'DELETE':
