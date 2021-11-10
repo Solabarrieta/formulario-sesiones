@@ -2,7 +2,7 @@
 // Constantes para el acceso a datos...
 //phpinfo();
 DEFINE("_HOST_", "localhost");
-DEFINE("_PORT_", "");
+DEFINE("_PORT_", "3306");
 DEFINE("_USERNAME_", "Oier");
 DEFINE("_DATABASE_", "Quiz");
 DEFINE("_PASSWORD_", "4258");
@@ -16,14 +16,14 @@ switch ($method) {
     case 'GET':
         if (isset($_GET['id'])) {
             $datos = "";
-            $id = $_GET['id'];
+            $id = file_get_contents('php://input');
             $sql = "SELECT * FROM vips WHERE email='$id'";
             $data = Database::EjecutarConsulta($cnx, $sql);
             if (isset($data[0])) {
-                echo "<br><br><b>ENHORABUENA " . $id . " ES VIP</b><br><img src=../images/ok.gif>";
+                echo "<br><br><b>ENHORABUENA " . $id . " ES VIP</b><br>";
                 break;
             } else {
-                echo "<br><br><b>LO SIENTO " . $id . " NO ES VIP</b><br><img src=../images/mal.gif>";
+                echo "<br><br><b>LO SIENTO " . $id . " NO ES VIP</b><br>";
                 break;
             }
         } else {
