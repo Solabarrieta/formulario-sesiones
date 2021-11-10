@@ -1,21 +1,11 @@
 <?php
 // Constantes para el acceso a datos...
 //phpinfo();
-<<<<<<< HEAD
-include 'DbConfig.php';
-
-DEFINE("_HOST_", $server);
-DEFINE("_PORT_", "3306");
-DEFINE("_USERNAME_", $user);
-DEFINE("_DATABASE_", $basededatos);
-DEFINE("_PASSWORD_", $pass);
-=======
 DEFINE("_HOST_", "localhost");
 DEFINE("_PORT_", "");
 DEFINE("_USERNAME_", "Oier");
 DEFINE("_DATABASE_", "Quiz");
 DEFINE("_PASSWORD_", "4258");
->>>>>>> b24b70bb8a33d4d40a0699d0720875d29632bfcc
 
 require_once 'database.php';
 $method = $_SERVER['REQUEST_METHOD'];
