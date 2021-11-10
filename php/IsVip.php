@@ -1,3 +1,9 @@
+<?php
+    include 'database.php';
+    $curl=curl_init();
+    $url='https:localhost/Formulario-API';
+    
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +25,3 @@
     <?php include '../html/Footer.html' ?>
     </body>
 </html>
-<?php
-    
-?>

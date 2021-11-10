@@ -1,11 +1,13 @@
 <?php
 // Constantes para el acceso a datos...
 //phpinfo();
-DEFINE("_HOST_", "");
-DEFINE("_PORT_", "");
-DEFINE("_USERNAME_", "");
-DEFINE("_DATABASE_", "");
-DEFINE("_PASSWORD_", "");
+include 'DbConfig.php';
+
+DEFINE("_HOST_", $server);
+DEFINE("_PORT_", "3306");
+DEFINE("_USERNAME_", $user);
+DEFINE("_DATABASE_", $basededatos);
+DEFINE("_PASSWORD_", $pass);
 
 require_once 'database.php';
 $method = $_SERVER['REQUEST_METHOD'];
@@ -26,6 +28,7 @@ $resource = $_SERVER['REQUEST_URI'];
 			}
 			else
 			{
+
 				// Servicio para Listar Vips (GET sin parámetro)
 			}
 			break;
@@ -37,5 +40,8 @@ $resource = $_SERVER['REQUEST_URI'];
             // Borrado de usuario VIP
 			}
     Database::Desconectar($cnx);
+    echo '<p>';
+    echo json_encode(array('method'=>$method,'arguments'=>$arguments,'uri'=>$resources,true));
+
 
 ?>

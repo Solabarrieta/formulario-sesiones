@@ -1,6 +1,5 @@
 <?php
 class Database {
-
     public static function Conectar() {
         $link = mysqli_connect(_HOST_, _USERNAME_, _PASSWORD_, _DATABASE_);
 
