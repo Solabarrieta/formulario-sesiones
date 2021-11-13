@@ -9,7 +9,7 @@ DEFINE("_PASSWORD_", "TWTnlYm33HtAL");
 
 require_once 'database.php';
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
-//$resource = $_SERVER['REQUEST_URI'];
+$resource = $_SERVER['REQUEST_URI'];
 
 $cnx = Database::Conectar();
 switch ($method) {

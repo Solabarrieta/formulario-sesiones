@@ -12,14 +12,14 @@
         <form action="" method="post">
             <h1>Es VIP?</h1>
             <input name="email" type="text">
-            <input type="submit" value="Es VIP?">
+            <input name="form-button" type="submit" value="Es VIP?">
         </form>
         <div id="esVipResponse">
             <?php
             if (isset($_POST['email'])) {
                 $id = $_POST['email'];
                 $curl = curl_init();
-                $url = "https://sw.ikasten.io/~G22/public_html/formulario-api/php/VipUsers.php?id=" . $id;
+                $url = "https://sw.ikasten.io/~G22/formulario-api/php/VipUsers.php?id=" . $id;
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
