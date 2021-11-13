@@ -16,19 +16,18 @@
         </form>
         <div id="esVipResponse">
             <?php
-            if(isset($_POST['email'])){
+            if (isset($_POST['email'])) {
                 $id = $_POST['email'];
-            $url = "http://localhost/SW-API/php/VipUsers.php";
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $id);
-            $vip = curl_exec($curl);
-            echo $vip;
-
+                $url = "https://sw.ikasten.io/~G22/formulario-api/php/vipusers/";
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $id);
+                $vip = curl_exec($curl);
+                echo $vip;
             }
-            
+
             ?>
 
         </div>
