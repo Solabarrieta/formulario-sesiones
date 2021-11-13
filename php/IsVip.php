@@ -16,20 +16,20 @@
         </form>
         <div id="esVipResponse">
             <?php
-            if(isset($_POST['email'])){
+            if (isset($_POST['email'])) {
                 $id = $_POST['email'];
-            echo $id;
-            
-            $curl = curl_init();
-            $url = "http://localhost/SW-API/php/VipUsers.php?id=" . $id;
-            curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-            $vip = curl_exec($curl);
-            echo $vip;
+                echo $id;
+
+                $curl = curl_init();
+                $url = "http:/php/VipUsers.php?id=" . $id;
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+                $vip = curl_exec($curl);
+                echo $vip;
             }
-            
-            
+
+
 
             ?>
 
