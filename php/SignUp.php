@@ -152,7 +152,7 @@
                         </script>';
             }
           } else {
-            echo 'El correo <span style="color: red;"' . $correo . '</span> NO esta matriculado en la UPV';
+            echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la UPV';
           }
         }
       }
