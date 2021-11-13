@@ -3,9 +3,9 @@
 //phpinfo();
 DEFINE("_HOST_", "localhost");
 DEFINE("_PORT_", "3306");
-DEFINE("_USERNAME_", "root");
+DEFINE("_USERNAME_", "G22");
 DEFINE("_DATABASE_", "db_G22");
-DEFINE("_PASSWORD_", "2000");
+DEFINE("_PASSWORD_", "TWTnlYm33HtAL");
 
 require_once 'database.php';
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
@@ -52,7 +52,7 @@ switch ($method) {
 
     case 'PUT':
         // Este no hay que implementar
-    
+
     case 'DELETE':
         // Borrado de usuario VIP
         $id = file_get_contents('php://input');
@@ -64,6 +64,5 @@ switch ($method) {
         } else {
             echo json_encode(array('Deleted VIP ' => $id));
         }
-        
 }
 Database::Desconectar($cnx);
