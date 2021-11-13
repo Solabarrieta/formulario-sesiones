@@ -12,11 +12,11 @@
         <form action="" method="post">
             <h1>Añade un usuario</h1>
             <input name="email" type="text">
-            <input type="submit" value="Es VIP?">
+            <input name="form-button" type="submit" value="Es VIP?">
         </form>
         <div id="esVipResponse">
             <?php
-            if (isset($_POST['email'])) {
+            if (isset($_POST['form-button'])) {
                 $id = $_POST['email'];
                 $url = "https://sw.ikasten.io/~G22/formulario-api/php/VipUsers.php";
                 $curl = curl_init();
