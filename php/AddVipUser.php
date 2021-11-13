@@ -18,7 +18,7 @@
             <?php
             if (isset($_POST['email'])) {
                 $id = $_POST['email'];
-                $url = "https://sw.ikasten.io/~G22/formulario-api/php/vipusers/";
+                $url = "https://sw.ikasten.io/~G22/formulario-api/vipusers/";
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
