@@ -49,10 +49,6 @@ switch ($method) {
             break;
         }
 
-
-    case 'PUT':
-        // Este no hay que implementar
-
     case 'DELETE':
         // Borrado de usuario VIP
         $id = file_get_contents('php://input');

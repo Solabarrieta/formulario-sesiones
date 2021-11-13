@@ -26,9 +26,6 @@
                 $vip = curl_exec($curl);
                 echo $vip;
             }
-
-
-
             ?>
 
         </div>
