@@ -39,16 +39,20 @@ switch ($method) {
         $id = file_get_contents('php://input');
         $sql = "INSERT INTO vips (email) VALUES ('$id')";
         $respuesta = Database::EjecutarNoConsulta($cnx, $sql);
-
-        if ($num == 0) {
+        echo $id;
+        echo $respuesta;
+        if ($respuesta == 0) {
             echo "Este usuario ya es VIP";
+            break;
         } else {
             echo json_encode(array('insertedVIP' => $id));
+            break;
         }
 
 
     case 'PUT':
         // Este no hay que implementar
+    
     case 'DELETE':
         // Borrado de usuario VIP
         $id = file_get_contents('php://input');
@@ -60,5 +64,6 @@ switch ($method) {
         } else {
             echo json_encode(array('Deleted VIP ' => $id));
         }
+        
 }
 Database::Desconectar($cnx);

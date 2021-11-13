@@ -17,7 +17,7 @@
         <div id="esVipResponse">
             <?php
             $id = $_POST['email'];
-            $url = "http://localhost/~oier/formulario-api/php/VipUsers.php";
+            $url = "http://localhost/SW-API/php/VipUsers.php";
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
