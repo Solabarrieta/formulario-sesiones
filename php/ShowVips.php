@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <?php include '../html/Head.html' ?>
 </head>
@@ -16,7 +17,7 @@
             <?php
             if (isset($_POST['form-button'])) {
                 $curl = curl_init();
-                $url = "http://localhost/SW-API/php/VipUsers.php";
+                $url = "https://sw.ikasten.io/~G22/formulario-api/php/VipUsers.php";
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
