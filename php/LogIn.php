@@ -95,7 +95,7 @@ if (isset($_POST['botonLogin'])) {
         echo "<br>";
       } else if ($error == 0) {
         echo '<script type="text/javascript"> alert("Bienvenido al Sistema: ' . $correo . ' ");
-                        window.location.href="Layout.php?correo=' . $correo . '";
+                        window.location.href="Layout.php";
                         </script>';
       }else if($error==-1){
         
