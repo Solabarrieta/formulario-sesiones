@@ -1,5 +1,9 @@
 <?php
 session_start();
+if($_SESSION['rol']!='prof'){
+    echo "Debe ser profesor para poder acceder a esta pagina";
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html>
