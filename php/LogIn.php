@@ -23,19 +23,33 @@ if (isset($_POST['botonLogin'])) {
     if (!$conn) {
       die("Connection failed: " . mysqli_connect_error());
     }
-    $sql = "SELECT * from users where correo = '$correo' and pass = '$userpass'";
-    $logear = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
 
-    if (is_null($row)) {
+
+    $sql = "SELECT pass from users where correo = '$correo' /*and pass = '$userpass'*/";
+    $logear = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    $contrasena = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
+
+    if (is_null($contrasena)) {
       $error = 3;
     } else {
-      //Logear al usuario
-      //printf ("%s (%s)\n", $row["correo"], $row["pass"]);
-      if (($row['correo'] == $correo) && ($row['pass'] == $userpass)) {
-        $_SESSION['User'] = $correo;
-        $_SESSION['UserRol'] = $row['tipouser'];
-        $error = 0;
+      if (password_verify($userpass, $contrasena['pass'])) {
+        $sql2 = "SELECT * from users where correo = '$correo'";
+        $logear = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+        $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
+
+        if (is_null($row)) {
+          $error = 3;
+        } else {
+          //Logear al usuario
+          //printf ("%s (%s)\n", $row["correo"], $row["pass"]);
+          if (($row['correo'] == $correo)) {
+            $_SESSION['correo'] = $correo;
+            $_SESSION['rol'] = $row['tipouser'];
+            $error = 0;
+          } else {
+            $error = 3;
+          }
+        }
       } else {
         $error = 3;
       }
@@ -94,15 +108,9 @@ if (isset($_POST['botonLogin'])) {
         echo "<h3>Datos de login incorrectos. :(</h3>";
         echo "<br>";
       } else if ($error == 0) {
-        if ($_SESSION['User'] == 'admin@ehu.es') {
-          echo '<script type="text/javascript"> alert("Bienvenido al Sistema: ' . $correo . ' ");
-                          window.location.href="HandlingAccounts.php";
-                          </script>';
-        } else {
-          echo '<script type="text/javascript"> alert("Bienvenido al Sistema: ' . $correo . ' ");
-                          window.location.href="Layout.php";
-                          </script>';
-        }
+        echo '<script type="text/javascript"> alert("Bienvenido al Sistema: ' . $correo . ' ");
+                        window.location.href="Layout.php";
+                        </script>';
       } else if ($error == -1) {
       }
 
