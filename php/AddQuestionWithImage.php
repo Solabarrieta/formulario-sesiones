@@ -47,61 +47,61 @@
             $errorCount += 1;
             echo "<h3>Debes introducir una dirección de correo. :(</h3>";
             echo "<br>";
-            echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+            echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if(!(preg_match($er,$correo) || preg_match($er2,$correo) || preg_match($er3,$correo))){
             $errorCount += 1;
             echo "<h3>Debes introducir una dirección de correo válida. :(</h3>";
             echo "<br>";
-            echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+            echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if($enun == '') {
             $errorCount += 1;
             echo "<h3>Debes introducir una pregunta. :(</h3>";
             echo "<br>";
-              echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+              echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if(strlen($enun) < 10){
               $errorCount += 1;
               echo "<h3>La pregunta debe tener 10 caracteres como mínimo. :(</h3>";
               echo "<br>";
-                echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+                echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if($correct == '') {
               $errorCount += 1;
               echo "<h3>Debes introducir una respuesta correcta. :(</h3>";
               echo "<br>";
-                echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+                echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if($inc1 == '') {
               $errorCount += 1;
               echo "<h3>Debes introducir una respuesta incorrecta 1. :(</h3>";
               echo "<br>";
-              echo "<a href="."QuestionFormWithImage.php?correo=  $correo ".">VOLVER A INSERTAR PREGUNTA</a>";
+              echo "<a href="."QuestionFormWithImage.php".">VOLVER A INSERTAR PREGUNTA</a>";
           }
           else if($inc2 == '') {
               $errorCount += 1;
               echo "<h3>Debes introducir una respuesta incorrecta 2. :(</h3>";
               echo "<br>";
-              echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+              echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if($inc3 == '') {
               $errorCount += 1;
               echo "<h3>Debes introducir una respuesta incorrecta 3. :(</h3>";
               echo "<br>";
-              echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+              echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if($compl == '') {
             $errorCount += 1;
             echo "<h3>Debes elegir una complejidad. :(</h3>";
             echo "<br>";
-            echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+            echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
           }
           else if($tema == '') {
             $errorCount += 1;
             echo "<h3>Debes especificar un tema. :(</h3>";
             echo "<br>";
-            echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>'; 
+            echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>'; 
           }
           
           if($errorCount == 0){ //Si no hay errores
@@ -119,7 +119,7 @@
             if(!$anadir){
               echo "<h3>Se ha producido un error al intentar insertar la pregunta en la base de datos. :(</h3>";
               echo "<br>";
-              echo '<a href="QuestionFormWithImage.php?correo='. $correo .'">VOLVER A INSERTAR PREGUNTA</a>';
+              echo '<a href="QuestionFormWithImage.php">VOLVER A INSERTAR PREGUNTA</a>';
             }
             else{
               //Si se puede introducir la pregunta, entonces guardamos la imagen en el directorio images y la añadimos.
@@ -166,7 +166,7 @@
               echo "<h3>Se ha introducido la pregunta en el fichero JSON. :)</h3>";
 
               echo '<br>';
-              echo '<a href="ShowQuestionsWithImage.php?correo='.$correo.'">VISUALIZAR PREGUNTAS</a>';
+              echo '<a href="ShowQuestionsWithImage.php">VISUALIZAR PREGUNTAS</a>';
             }
           }
         //}	
