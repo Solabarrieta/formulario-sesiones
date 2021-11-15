@@ -1,3 +1,7 @@
+<?php
+session_start();
+session_destroy();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +13,7 @@
     <div>
     <script type="text/javascript">
         alert("¡Hasta pronto!");
+
         window.location.href="Layout.php";
     </script>;
     </div>

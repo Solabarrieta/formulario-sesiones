@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,7 @@
             height: 100%;
           }
         </style>
-        <?php if (isset($_GET['correo'])){ ?>
+        <?php if (isset($_SESSION['correo'])){ ?>
           <form id="fquestion" name="fquestion" action="AddQuestionWithImage.php?correo=<?php echo $_GET["correo"]; ?>" enctype="multipart/form-data"  method = "POST" onsubmit = {addQuestion} actionstyle="width: 60%; margin: 0px auto;">
         <?php }else{ ?>  
           <form id="fquestion" name="fquestion" action="AddQuestionWithImage.php" enctype="multipart/form-data"  method = "POST" onsubmit = "return validacion()" actionstyle="width: 60%; margin: 0px auto;">
@@ -30,7 +33,7 @@
             </caption>
             <tr>
               <td align="right">Dirección de correo (*): </td>
-              <?php if (isset($_GET['correo'])){                                           
+              <?php if (isset($_SESSION['correo'])){                                           
                 echo '<td align="left"><input type="text" id="correo" name="correo" autofocus value ="'.$_GET["correo"].'"></td>';
                }else{ ?>  
                 <td align="left"><input type="text" id="correo" name="correo" autofocus></td>
