@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -138,7 +143,19 @@
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
             }
-            $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$userpass', '$imagen_dir')";
+
+            $hashpass= password_hash($userpass,PASSWORD_DEFAULT, ['cost'=> 15]); 
+            echo $hashpass;
+            $result= password_verify($userpass,$hashpass);
+            echo($result);
+            if($result){
+              echo "<br>contraseña introducica correctamente";
+            }else{
+              echo "<br>contraseña incorrecta";
+            }
+
+            
+            $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
             $anadir = mysqli_query($conn, $sql);
             if (!$anadir) {
               echo "<h3>Se ha producido un error al intentar registrar al usuario. :(</h3>";
@@ -146,10 +163,10 @@
             } else {
               //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
               move_uploaded_file($imagen_loc_tmp, $imagen_dir);
-              mysqli_close($conn);
+              mysqli_close($conn);/*
               echo '<script type="text/javascript"> alert("Se ha realizado el registro de forma correcta");
                         window.location.href="LogIn.php";
-                        </script>';
+                        </script>';*/
             }
           } else {
             echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la asignatura Sistemas Web';
