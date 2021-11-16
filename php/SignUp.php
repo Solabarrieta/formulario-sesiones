@@ -155,10 +155,10 @@ error_reporting(E_ALL);
             } else {
               //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
               move_uploaded_file($imagen_loc_tmp, $imagen_dir);
-              mysqli_close($conn);/*
+              mysqli_close($conn);
               echo '<script type="text/javascript"> alert("Se ha realizado el registro de forma correcta");
                         window.location.href="LogIn.php";
-                        </script>';*/
+                        </script>';
             }
           } else {
             echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la asignatura Sistemas Web';
