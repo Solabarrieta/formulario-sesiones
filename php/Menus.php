@@ -31,9 +31,17 @@
         <span><a href="ShowVips.php">Mostrar VIPS</a></span>
       <?php
       }
+    } else if ($_SESSION['rol'] == 'Admin') { ?>
+      <span><a href="Layout.php"> Inicio</a></span>
+      <span><a href="Credits.php">Creditos</a></span>
+      <span><a href="HandlingAccounts.php">Gestionar cuentas</a></span>
+    <?php
     } else { ?>
       <span><a href="Layout.php"> Inicio</a></span>
       <span><a href="Credits.php">Creditos</a></span>
+      }
+
+      ?>
     <?php } ?>
 
   </nav>
