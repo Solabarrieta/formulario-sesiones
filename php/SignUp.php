@@ -145,14 +145,6 @@ error_reporting(E_ALL);
             }
 
             $hashpass= password_hash($userpass,PASSWORD_DEFAULT, ['cost'=> 15]); 
-            echo $hashpass;
-            $result= password_verify($userpass,$hashpass);
-            echo($result);
-            if($result){
-              echo "<br>contraseña introducica correctamente";
-            }else{
-              echo "<br>contraseña incorrecta";
-            }
 
             
             $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
