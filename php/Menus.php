@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <div id='page-wrap'>
   <header class='main' id='h1'>
     <?php if (!isset($_SESSION['correo'])) { ?>
@@ -7,7 +10,7 @@
       <span class="right"><a href="SignUp.php">Registro</a></span>
       <span class="right"><a href="LogIn.php">Login</a></span>
     <?php } else { ?>
-      <span class="right"><a href="LogOut.php">Logout</a><?php echo ' ' . $_SESSION['correo'] ?></span>
+      <span class="right"><a href="LogOut.php">Logout</a><?php echo ' ' . $_SESSION['correo']; ?></span>
     <?php } ?>
 
   </header>
