@@ -50,8 +50,8 @@ if (isset($_POST['botonLogin'])) {
             $error = 3;
           }
         }
-      }else{
-        $error=3;
+      } else {
+        $error = 3;
       }
     }
   }
@@ -113,6 +113,8 @@ if (isset($_POST['botonLogin'])) {
                         </script>';
       } else if ($error == -1) {
       }
+
+
       ?>
 
     </div>
