@@ -71,13 +71,16 @@ if ($_SESSION['rol'] != 'admin') {
 
 
             while ($row = mysqli_fetch_array($result)) {
+                if ($row['correo'] != 'admin@ehu.es') {
 
-                echo
-                "<tr>
+
+                    echo
+                    "<tr>
                      <td>" . $row['correo'] . "</td>" .
-                    "<td>" . $row['pass'] . "</td>" .
-                    "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td></tr>" .
-                    "<td>" . $row['estado'] . "</td>";
+                        "<td>" . $row['pass'] . "</td>" .
+                        "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td></tr>" .
+                        "<td>" . $row['estado'] . "</td>";
+                }
             }
             echo "</table>";
             ?>
