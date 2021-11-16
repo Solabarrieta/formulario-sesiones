@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['correo'])){
+  echo "Debe iniciar sesion para poder insertar una pregunta";
+  die();
+}
 ?>
 <!DOCTYPE html>
 <html>

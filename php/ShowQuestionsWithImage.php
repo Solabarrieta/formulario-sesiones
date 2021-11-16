@@ -1,5 +1,10 @@
 <?php
 session_start();
+if(!isset($_SESSION['correo'])){
+  echo "Debe iniciar sesion para poder visualizar las preguntas";
+  die();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
