@@ -146,7 +146,9 @@ error_reporting(E_ALL);
 
             $hashpass= password_hash($userpass,PASSWORD_DEFAULT, ['cost'=> 15]); 
             echo $hashpass;
-
+            if($correo=='admin@ehu.es' && $tipoUser='prof'){
+              $tipoUser='admin';
+            }
             
             $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
             $anadir = mysqli_query($conn, $sql);
@@ -154,6 +156,7 @@ error_reporting(E_ALL);
               echo "<h3>Se ha producido un error al intentar registrar al usuario. :(</h3>";
               echo "<br>";
             } else {
+              
               //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
               move_uploaded_file($imagen_loc_tmp, $imagen_dir);
               mysqli_close($conn);
