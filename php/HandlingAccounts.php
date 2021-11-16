@@ -44,6 +44,8 @@ if ($_SESSION['rol'] != 'admin') {
                     height: 100px;
                 }
             </style>
+
+            
             <?php
             //Conectamos con la base de datos mysql
             include 'DbConfig.php';
