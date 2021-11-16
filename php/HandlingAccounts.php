@@ -75,14 +75,9 @@ if ($_SESSION['rol'] != 'admin') {
                      <td>" . $row['correo'] . "</td>" .
                     "<td>" . $row['pass'] . "</td>" .
                     "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td></tr>" .
-                    "<td>" . $row['estado'] . "</td>" .
-                    '<td><input type="button" name="cambiar_estado"></td>';
+                    "<td>" . $row['estado'] . "</td>";
             }
             echo "</table>";
-
-            if ($_POST['cambiar_estado']) {
-            }
-
             ?>
         </div>
     </section>
