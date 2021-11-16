@@ -58,26 +58,26 @@ if ($_SESSION['rol'] != 'admin') {
             $result = mysqli_query($conn, "SELECT * from users");
 
             echo "<table " . " bgcolor=" . "'#9cc4e8'" . ">";
-            echo "<tr>
+            echo ' <tr>
         <th>EMAIL</th>
         <th>PASS</th>
         <th>IMAGEN</th>
         <th>ESTADO</th>
         <th>BLOQUEO</th>
         <th>BORRAR</th>
-        </tr>";
+        </tr>';
+
 
 
             while ($row = mysqli_fetch_array($result)) {
                 if ($row['correo'] != 'admin@ehu.es') {
-
-
                     echo
                     "<tr>
-                     <td>" . $row['correo'] . "</td>" .
+                        <td>" . $row['correo'] . "</td>" .
                         "<td>" . $row['pass'] . "</td>" .
-                        "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td></tr>" .
-                        "<td>" . $row['estado'] . "</td>";
+                        "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
+                        "<td>" . $row['estado'] . "</td>" .
+                        "</tr>";
                 }
             }
             echo "</table>";
