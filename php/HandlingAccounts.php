@@ -77,6 +77,8 @@ if ($_SESSION['rol'] != 'admin') {
                         "<td>" . $row['pass'] . "</td>" .
                         "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
                         "<td>" . $row['estado'] . "</td>" .
+                        '<td><button value="' . $row['correo'] . '">Editar</button>' .
+                        '<td><button value="' . $row['correo'] . '">Borrar</button>' .
                         "</tr>";
                 }
             }
