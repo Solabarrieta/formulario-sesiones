@@ -31,6 +31,7 @@
         <span><a href="ShowVips.php">Mostrar VIPS</a></span>
       <?php
       }
+
     } else { ?>
       <span><a href="Layout.php"> Inicio</a></span>
       <span><a href="Credits.php">Creditos</a></span>

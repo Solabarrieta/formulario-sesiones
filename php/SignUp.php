@@ -145,6 +145,7 @@ error_reporting(E_ALL);
             }
 
             $hashpass= password_hash($userpass,PASSWORD_DEFAULT, ['cost'=> 15]); 
+            echo $hashpass;
 
             
             $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
