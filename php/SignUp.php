@@ -83,7 +83,6 @@ if (isset($_POST['botonReg'])) {
       }
 
       $hashpass = password_hash($userpass, PASSWORD_DEFAULT, ['cost' => 15]);
-      echo $hashpass;
       if ($correo == 'admin@ehu.es' && $tipoUser = 'prof') {
         $tipoUser = 'admin';
       }
