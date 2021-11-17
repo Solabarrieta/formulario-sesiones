@@ -37,17 +37,21 @@ if (isset($_POST['botonLogin'])) {
         $logear = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
         $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
 
+        //Comprueba si el usuario existe
         if (is_null($row)) {
           $error = 3;
         } else {
-          //Logear al usuario
-          //printf ("%s (%s)\n", $row["correo"], $row["pass"]);
-          if (($row['correo'] == $correo)) {
-            $_SESSION['correo'] = $correo;
-            $_SESSION['rol'] = $row['tipouser'];
-            $error = 0;
+          //Comprueba si el usuario esta baneado
+          if ($row['estado'] == 'baneado') {
+            $error = 4;
           } else {
-            $error = 3;
+            if (($row['correo'] == $correo)) {
+              $_SESSION['correo'] = $correo;
+              $_SESSION['rol'] = $row['tipouser'];
+              $error = 0;
+            } else {
+              $error = 3;
+            }
           }
         }
       } else {
@@ -111,7 +115,8 @@ if (isset($_POST['botonLogin'])) {
         echo '<script type="text/javascript"> alert("Bienvenido al Sistema: ' . $correo . ' ");
                         window.location.href="Layout.php";
                         </script>';
-      } else if ($error == -1) {
+      } else if ($error == 4) {
+        echo '<h3>Lo siento, estas <strong style="color: red;">BANEADO!!</strong></h3>';
       }
 
 
