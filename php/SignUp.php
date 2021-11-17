@@ -6,9 +6,9 @@ $_SESSION['UserRol'] = $_POST['user'];
 
 print_r($_SESSION);
 
-if ($_SESSION) {
+/*if ($_SESSION) {
   header("Location: Layout.php");
-}
+}*/
 ?>
 
 <?php
