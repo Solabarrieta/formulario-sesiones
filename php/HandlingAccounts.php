@@ -73,15 +73,13 @@ if ($_SESSION['rol'] != 'admin') {
                 if ($row['correo'] != 'admin@ehu.es') {
                     $email = $row['correo'];
                     $estado = $row['estado'];
-                    echo $email;
-                    echo $estado;
                     echo
                     "<tr>
                         <td>" . $row['correo'] . "</td>" .
                         "<td>" . $row['pass'] . "</td>" .
                         "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
                         "<td>" . $row['estado'] . "</td>" .
-                        '<td><input type = "button" onclick= "changeState(' . $email . ',' . $estado . ')" value= "Cambiar estado"></td>' .
+                        '<td><input type = "button" onclick= "changeStatus(\'' . $email . '\',\'' . $estado . '\')" value= "Cambiar estado"></td>' .
                         '<td><input type = "button" onclick="deleteUser(\'' . $email . '\')" value = "Borrar"></td>' .
                         "</tr>";
                 }
