@@ -15,10 +15,11 @@ session_start();
 
   </header>
   <nav class='main' id='n1' role='navigation'>
-    <?php if (isset($_SESSION['correo'])) { ?>
+    <span><a href="Layout.php"> Inicio</a></span>
+    <span><a href="Credits.php">Creditos</a></span>
 
-      <span><a href="Layout.php"> Inicio</a></span>
-      <span><a href="Credits.php">Creditos</a></span>
+    <?php if (isset($_SESSION['correo']) && $_SESSION['correo'] != 'admin@ehu.es') { ?>
+
       <span><a href="HandlingQuizesAjax.php"> Insertar Pregunta </a></span>
       <span><a href="ShowQuestionsWithImage.php"> Ver Preguntas </a></span>
       <span><a href="ShowXMLQuestionsWithImage.php"> Ver Preguntas XML</a></span>
@@ -31,13 +32,11 @@ session_start();
         <span><a href="DeleteVipUser.php">Eliminar Usuario VIP</a></span>
         <span><a href="ShowVips.php">Mostrar VIPS</a></span>
       <?php
-      }
+      } ?>
+    <?php
 
-    } else{ ?>
-      <span><a href="Layout.php"> Inicio</a></span>
-      <span><a href="Credits.php">Creditos</a></span>
-    <?php } ?>
-
+    } else if($_SESSION['rol'] == 'admin'){ ?>
+      <span><a href="HandlingAccounts.php">Gestionar cuentas</a></span>
+    <?php
+    } ?>
   </nav>
-
-  <!--<script type="text/javascript" src="../js/todos.js"></script>-->
