@@ -7,6 +7,7 @@ if ($_SESSION['rol'] != 'admin') {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -15,6 +16,41 @@ if ($_SESSION['rol'] != 'admin') {
 </head>
 
 <body>
+    <?php
+    function modificarEstado($correoinput, $estado)
+    {
+        echo "ha entrado a la funcion";
+        echo "<br>";
+        echo $correoinput;
+        echo "<br>";
+        echo $estado;
+        echo "<br>";
+        require_once 'database.php';
+        DEFINE("_HOST_", "localhost");
+        DEFINE("_PORT_", "3306");
+        DEFINE("_USERNAME_", "root");
+        DEFINE("_DATABASE_", "db_G22");
+        DEFINE("_PASSWORD_", "2000");
+        $cnx = Database::Conectar()or die('no ha sido posible conectarse');
+        
+        
+        if ($estado == 'activo') {
+            $sql = "UPDATE users  SET estado = 'bloqueado' WHERE correo = '$correoinput'";
+        } else if ($estado == 'bloqueado') {
+            $sql = "UPDATE users  SET estado = 'activo' WHERE correo = '$correoinput'";
+        }
+        //$sql= "UPDATE TABLE users  SET estado = 'activo' WHERE correo = '$correoinput'";
+        Database::EjecutarNoConsulta($cnx, $sql) or die('no ha sido posible ejecutar la consulta');
+        Database::Desconectar($cnx);
+    }
+    if (isset($_POST['id']) && isset($_POST['estadofun'])) {
+        echo "hola";
+        $funcionid=$_POST['id'];
+        $functionestate=$_POST['estadofun'];
+        modificarEstado($funcionid,$functionestate);
+    }
+
+    ?>
     <?php include '../php/Menus.php' ?>
     <section class="main" id="s1">
         <div>
@@ -45,7 +81,7 @@ if ($_SESSION['rol'] != 'admin') {
                 }
             </style>
 
-            
+
             <?php
             //Conectamos con la base de datos mysql
             include 'DbConfig.php';
@@ -59,15 +95,15 @@ if ($_SESSION['rol'] != 'admin') {
             //Cogemos los datos de la tabla
             $result = mysqli_query($conn, "SELECT * from users");
 
-            echo "<table " . " bgcolor=" . "'#9cc4e8'" . ">";
-            echo "<tr>
-        <th>EMAIL</th>
+            echo '<table id="tablaPersonas">';
+            echo "<thead><tr>
+        <th id='email'>EMAIL</th>
         <th>PASS</th>
         <th>IMAGEN</th>
         <th>ESTADO</th>
         <th>BLOQUEO</th>
         <th>BORRAR</th>
-        </tr>";
+        </tr></thead><tbody>";
 
 
             while ($row = mysqli_fetch_array($result)) {
@@ -78,15 +114,26 @@ if ($_SESSION['rol'] != 'admin') {
                     "<tr>
                      <td>" . $row['correo'] . "</td>" .
                         "<td>" . $row['pass'] . "</td>" .
-                        "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td></tr>" .
-                        "<td>" . $row['estado'] . "</td>";
+                        "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
+                        "<td>" . $row['estado'] . "</td>
+                        <td></td>
+                        <td></td>
+                        </tr>";
                 }
             }
-            echo "</table>";
+
+            echo "</tbody></table>";
             ?>
+
         </div>
     </section>
     <?php include '../html/Footer.html' ?>
+    <!--<script src="../js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">-->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <script src="../js/gestionarAccount.js"></script>
 </body>
 
 </html>

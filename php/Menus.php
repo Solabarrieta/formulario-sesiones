@@ -35,7 +35,7 @@ session_start();
       } ?>
     <?php
 
-    } else { ?>
+    } else if($_SESSION['rol'] == 'admin'){ ?>
       <span><a href="HandlingAccounts.php">Gestionar cuentas</a></span>
     <?php
     } ?>
