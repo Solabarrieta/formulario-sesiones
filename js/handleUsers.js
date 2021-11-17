@@ -3,7 +3,8 @@ function deleteUser(correo){
         $.ajax({
             type: "POST",
             url: '../php/DeleteUser.php',
-            data: {email: correo }
+            data: {email: correo },
+            success: ()=>{window.location.reload();}
         });
     }
 }
@@ -24,15 +25,14 @@ function printStatus(estado){
 
 function changeStatus(correo, estado){
     let notStatus = printStatus(estado);
-    alert(notStatus[0]);
-    alert(notStatus[1]);
     let status = notStatus[1];
     if(confirm(`¿Seguro que quieres ${notStatus[0]} a ${correo}?`)){
-        alert(status);
         $.ajax({
             type: "POST",
             url: '../php/ChangeStatus.php',
-            data: {state: status, email: correo }
+            data: {state: status, email: correo },
+            success: ()=> {window.location.reload();
+            }
         });
     }
 }
