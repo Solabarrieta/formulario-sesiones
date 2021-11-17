@@ -2,7 +2,7 @@ function deleteUser(correo){
     $.ajax({
         type: "POST",
         url: '../php/DeleteUser.php',
-        data: {state: estado, email: correo }
+        data: {email: correo }
     });
 }
 
