@@ -12,6 +12,7 @@ if ($_SESSION['rol'] != 'admin') {
 
 <head>
     <?php include '../html/Head.html' ?>
+    <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/handleUsers.js"></script>
 </head>
 
@@ -80,8 +81,8 @@ if ($_SESSION['rol'] != 'admin') {
                         "<td>" . $row['pass'] . "</td>" .
                         "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
                         "<td>" . $row['estado'] . "</td>" .
-                        '<td><input type = "button" onclick= "changeState($email,$estado)" value= "Cambiar estado"></td>' .
-                        '<td><input type = "button" onclick="deleteUser($email)" value = "Borrar"></td>' .
+                        '<td><input type = "button" onclick= "changeState(' . $email . ',' . $estado . ')" value= "Cambiar estado"></td>' .
+                        '<td><input type = "button" onclick="deleteUser(\'' . $email . '\')" value = "Borrar"></td>' .
                         "</tr>";
                 }
             }
