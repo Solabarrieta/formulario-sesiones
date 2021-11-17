@@ -12,6 +12,7 @@ if ($_SESSION['rol'] != 'admin') {
 
 <head>
     <?php include '../html/Head.html' ?>
+    <script src="../js/handleUsers.js"></script>
 </head>
 
 <body>
@@ -67,18 +68,20 @@ if ($_SESSION['rol'] != 'admin') {
         <th>BORRAR</th>
         </tr>';
 
-
-
             while ($row = mysqli_fetch_array($result)) {
                 if ($row['correo'] != 'admin@ehu.es') {
+                    $email = $row['correo'];
+                    $estado = $row['estado'];
+                    echo $email;
+                    echo $estado;
                     echo
                     "<tr>
                         <td>" . $row['correo'] . "</td>" .
                         "<td>" . $row['pass'] . "</td>" .
                         "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
                         "<td>" . $row['estado'] . "</td>" .
-                        '<td><button value="' . $row['correo'] . '">Editar</button>' .
-                        '<td><button value="' . $row['correo'] . '">Borrar</button>' .
+                        '<td><input type = "button" onclick= "changeState($email,$estado)" value= "Cambiar estado"></td>' .
+                        '<td><input type = "button" onclick="deleteUser($email)" value = "Borrar"></td>' .
                         "</tr>";
                 }
             }
