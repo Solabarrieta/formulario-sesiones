@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['rol']!='prof'){
+if ($_SESSION['rol'] != 'prof') {
     echo "Debe ser profesor para poder acceder a esta pagina";
     die();
 }
@@ -25,7 +25,14 @@ if($_SESSION['rol']!='prof'){
             <?php
             if (isset($_POST['form-button'])) {
                 $id = $_POST['email'];
-                $url = "https://sw.ikasten.io/~G22/formulario-api/php/VipUsers.php";
+
+                //URL local
+
+                $url = "http://localhost/~oier/REST/vipusers/";
+
+                //URL servidor
+
+                $url = "https://sw.ikasten.io/~G22/REST/vipusers/";
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
