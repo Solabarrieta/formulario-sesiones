@@ -7,10 +7,10 @@ function deleteUser(correo){
 }
 
 
-function changeState(correo, estado){
+function changeStatus(correo, estado){
     $.ajax({
         type: "POST",
-        url: '../php/HandlingAccounts.php',
+        url: '../php/ChangeStatus.php',
         data: {state: estado, email: correo }
     });
 }
