@@ -108,11 +108,9 @@ if ($_SESSION['rol'] != 'admin') {
 
             while ($row = mysqli_fetch_array($result)) {
                 if ($row['correo'] != 'admin@ehu.es') {
-
-
                     echo
                     "<tr>
-                     <td>" . $row['correo'] . "</td>" .
+                        <td>" . $row['correo'] . "</td>" .
                         "<td>" . $row['pass'] . "</td>" .
                         "<td><img src=" . $row['imagen'] . " class='imgPrev2'></img></td>" .
                         "<td>" . $row['estado'] . "</td>
