@@ -19,8 +19,7 @@
 
       <span><a href="HandlingQuizesAjax.php"> Insertar Pregunta </a></span>
       <span><a href="ShowQuestionsWithImage.php"> Ver Preguntas </a></span>
-      <span><a href="ShowXMLQuestionsWithImage.php"> Ver Preguntas XML</a></span>
-      <span><a href="ShowJsonQuestionsWithImage.php"> Ver Preguntas JSON</a></span>
+      <!-- Hay que añadir un gestionar preguntas, y dentro de este poner un boton para ver preguntas y otro para añadir la pregunta actual -->
 
       <?php
       if ($_SESSION['rol'] == 'prof') { ?>
