@@ -25,8 +25,6 @@ session_start();
       <span><a href="ShowJsonQuestionsWithImage.php"> Ver Preguntas JSON</a></span>
 
       <?php
-      $id = $_SESSION["correo"];
-
       if ($_SESSION['rol'] == 'prof') { ?>
         <span><a href="IsVip.php"> EsVip?</a></span>
         <span><a href="AddVipUser.php">Añadir usuario VIP</a></span>
@@ -35,7 +33,7 @@ session_start();
       <?php
       }
 
-    } else { ?>
+    } else{ ?>
       <span><a href="Layout.php"> Inicio</a></span>
       <span><a href="Credits.php">Creditos</a></span>
     <?php } ?>
