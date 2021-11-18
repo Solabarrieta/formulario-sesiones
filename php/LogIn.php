@@ -1,7 +1,5 @@
 <?php
 session_start();
-$_SESSION['User'] = $_POST['correo'];
-$_SESSION['UserRol'] = $_POST['user'];
 
 $error = -1;
 //Validación del registro en el servidor
