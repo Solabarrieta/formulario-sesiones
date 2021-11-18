@@ -9,6 +9,7 @@ $_SESSION['UserRol'] = $_POST['user'];
 ?>
 
 <?php
+
 //Validación del registro en el servidor
 if (isset($_POST['botonReg'])) {
   $tipoUser = "";
@@ -140,59 +141,64 @@ if (isset($_POST['botonReg'])) {
       </form>
 
       <?php
-      if ($error == 1) {
-        echo '<h3>El correo introducido y el tipo de usuario<strong style="color: red"> NO COINCIDEN</strong></h3>';
-        echo '<h3>Si tu correo es de tipo <strong style="color: red">ESTUDIANTE</strong>, escoge tipo de usuario <strong style="color: red">ALUMNO</strong></h3>';
-        echo '<h3>Si tu correo es de tipo <strong style="color: red">PROFESOR</strong>, escoge tipo de usuario <strong style="color: red">PROFESOR</strong></h3>';
-      } else if ($error == 2) {
-        echo '<h3>Por favor, introduce un correo de la UPV/EHU</h3>';
-      } else if ($error == 3) {
-        echo '<h3>El nombre debe tener <strong style="color: red">DOS</strong> o más caracteres</h3>';
-      } else if ($error == 4) {
-        echo '<h3>El apellido debe tener <strong style="color: red">DOS</strong> o más caracteres</h3>';
-      } else if ($error == 5) {
-        echo '<h3>La contraseña  debe tener como mínimo <strong style="color: red">OCHO</strong> caracteres</h3>';
-      } else if ($error == 6) {
-        echo '<h3>Las contraseñas que has introducido <strong style="color: red">NO COINCIDEN</strong></h3>';
-      } else if ($error == 0) {
-        include 'ClientVerifyEnrollment.php';
-        if ($response == 'SI') {
-          //Si no ha habido ningún error, se registra al usuario
-          //Conectamos con la base de datos mysql
-          include 'DbConfig.php';
-          $conn = mysqli_connect($server, $user, $pass, $basededatos);
-          $conn->set_charset("utf8");
+      if (isset($_POST['botonReg'])) {
+        if ($error == 1) {
+          echo '<h3>El correo introducido y el tipo de usuario<strong style="color: red"> NO COINCIDEN</strong></h3>';
+          echo '<h3>Si tu correo es de tipo <strong style="color: red">ESTUDIANTE</strong>, escoge tipo de usuario <strong style="color: red">ALUMNO</strong></h3>';
+          echo '<h3>Si tu correo es de tipo <strong style="color: red">PROFESOR</strong>, escoge tipo de usuario <strong style="color: red">PROFESOR</strong></h3>';
+        } else if ($error == 2) {
+          echo '<h3>Por favor, introduce un correo de la UPV/EHU</h3>';
+        } else if ($error == 3) {
+          echo '<h3>El nombre debe tener <strong style="color: red">DOS</strong> o más caracteres</h3>';
+        } else if ($error == 4) {
+          echo '<h3>El apellido debe tener <strong style="color: red">DOS</strong> o más caracteres</h3>';
+        } else if ($error == 5) {
+          echo '<h3>La contraseña  debe tener como mínimo <strong style="color: red">OCHO</strong> caracteres</h3>';
+        } else if ($error == 6) {
+          echo '<h3>Las contraseñas que has introducido <strong style="color: red">NO COINCIDEN</strong></h3>';
+        } else if ($error == 0) {
 
-          if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-          }
+          require_once 'ClientVerifyEnrollment.php';
 
-          $hashpass = password_hash($userpass, PASSWORD_DEFAULT, ['cost' => 15]);
-          if ($correo == 'admin@ehu.es' && $tipoUser = 'prof') {
-            $tipoUser = 'admin';
-          }
+          if ($valido) {
+            //Si no ha habido ningún error, se registra al usuario
+            //Conectamos con la base de datos mysql
+            include 'DbConfig.php';
+            $conn = mysqli_connect($server, $user, $pass, $basededatos);
+            $conn->set_charset("utf8");
 
-          $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
-          $anadir = mysqli_query($conn, $sql);
-          if (!$anadir) {
-            echo "<h3>Se ha producido un error al intentar registrar al usuario. :(</h3>";
-            echo "<br>";
-          } else {
+            if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+            }
 
-            //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
-            move_uploaded_file($imagen_loc_tmp, $imagen_dir);
-            mysqli_close($conn);
-            echo '<script type="text/javascript"> alert("Se ha realizado el registro de forma correcta");
+            $hashpass = password_hash($userpass, PASSWORD_DEFAULT, ['cost' => 15]);
+
+            if ($correo == 'admin@ehu.es' && $tipoUser = 'prof') {
+              $tipoUser = 'admin';
+            }
+
+            $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
+            $anadir = mysqli_query($conn, $sql);
+            if (!$anadir) {
+              echo "<h3>Se ha producido un error al intentar registrar al usuario. :(</h3>";
+              echo "<br>";
+            } else {
+
+              //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
+              move_uploaded_file($imagen_loc_tmp, $imagen_dir);
+              mysqli_close($conn);
+              echo '<script type="text/javascript"> alert("Se ha realizado el registro de forma correcta");
                             window.location.href="LogIn.php";
                             </script>';
+            }
+          } else {
+            echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la asignatura Sistemas Web';
           }
         } else {
-          echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la asignatura Sistemas Web';
-        }
-      } else {
-        echo '<script>alert("Ha ocurrido un error inesperado, por favor, intentelo de nuevo ")
+          echo '<script>alert("Ha ocurrido un error inesperado, por favor, intentelo de nuevo ")
                   window.location.href="SignUp.php"
         </script>';
+        }
       }
 
       ?>
