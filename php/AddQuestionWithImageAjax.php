@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['correo'])) {
+  echo '<script type="text/javascript"> alert("Debes estar logueado!! ");
+    window.location.href="LogIn.php";
+    </script>';
+}
+
 $errorCount = 0;
 
 //Inicializamos las variables que van a contener la información enviada por el formulario de login

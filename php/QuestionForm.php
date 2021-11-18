@@ -1,8 +1,19 @@
+<?php
+session_start();
+if (!isset($_SESSION['correo'])) {
+  echo '<script type="text/javascript"> alert("Debes estar logueado!! ");
+    window.location.href="LogIn.php";
+    </script>';
+}
+?>
+
 <!DOCTYPE html>
 <html>
+
 <head>
-  <?php include '../html/Head.html'?>
+  <?php include '../html/Head.html' ?>
 </head>
+
 <body>
   <?php include '../php/Menus.php' ?>
   <section class="main" id="s1">
@@ -15,4 +26,5 @@
   </section>
   <?php include '../html/Footer.html' ?>
 </body>
+
 </html>

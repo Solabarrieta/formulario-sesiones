@@ -1,8 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION['correo'])){
-  echo "Debe iniciar sesion para poder insertar una pregunta";
-  die();
+if (!isset($_SESSION['correo'])) {
+  echo '<script>
+  alert("Debes estar logueado!! ");
+  window.location.href = "LogIn.php";</script>';
 }
 ?>
 <!DOCTYPE html>

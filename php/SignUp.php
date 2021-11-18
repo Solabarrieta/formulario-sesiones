@@ -171,7 +171,7 @@ if (isset($_POST['botonReg'])) {
               die("Connection failed: " . mysqli_connect_error());
             }
 
-            $hashpass = password_hash($userpass, PASSWORD_DEFAULT, ['cost' => 15]);
+            $hashpass = password_hash($userpass, PASSWORD_DEFAULT, [15]);
 
             if ($correo == 'admin@ehu.es' && $tipoUser = 'prof') {
               $tipoUser = 'admin';

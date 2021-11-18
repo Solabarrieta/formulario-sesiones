@@ -1,8 +1,9 @@
 <?php
 session_start();
 if ($_SESSION['rol'] != 'prof') {
-    echo "Debe ser profesor para poder acceder a esta pagina";
-    die();
+    echo '<script>
+    alert("Debes estar logueado como profesor!! ");
+    window.location.href = "LogIn.php";</script>';
 }
 ?>
 <!DOCTYPE html>

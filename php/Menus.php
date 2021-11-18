@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['correo'])) {
+  echo '<script type="text/javascript"> alert("Debes estar logueado!! ");
+    window.location.href="LogIn.php";
+    </script>';
+}
 ?>
 <div id='page-wrap'>
   <header class='main' id='h1'>

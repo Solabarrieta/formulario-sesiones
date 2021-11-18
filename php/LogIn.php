@@ -1,5 +1,8 @@
 <?php
 session_start();
+$_SESSION['User'] = $_POST['correo'];
+$_SESSION['UserRol'] = $_POST['user'];
+
 $error = -1;
 //Validación del registro en el servidor
 if (isset($_POST['botonLogin'])) {
@@ -117,8 +120,6 @@ if (isset($_POST['botonLogin'])) {
                         </script>';
       } else if ($error == 4) {
         echo '<h3>Lo siento, estas <strong style="color: red;">BANEADO!!</strong></h3>';
-      } else {
-        echo '<h3>Ha ocurrido un error inesperado...</h3>';
       }
 
 
