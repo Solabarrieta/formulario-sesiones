@@ -117,6 +117,8 @@ if (isset($_POST['botonLogin'])) {
                         </script>';
       } else if ($error == 4) {
         echo '<h3>Lo siento, estas <strong style="color: red;">BANEADO!!</strong></h3>';
+      } else {
+        echo '<h3>Ha ocurrido un error inesperado...</h3>';
       }
 
 
