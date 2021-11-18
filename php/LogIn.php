@@ -33,7 +33,8 @@ if (isset($_POST['botonLogin'])) {
     if (is_null($contrasena)) {
       $error = 3;
     } else {
-      if (password_verify($userpass, $contrasena['pass'])) {
+      $hash = $contrasena['pass'];
+      if (password_verify($userpass, $hash)) {
         $sql2 = "SELECT * from users where correo = '$correo'";
         $logear = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
         $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
