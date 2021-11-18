@@ -11,9 +11,9 @@ if (!isset($_SESSION['correo'])) {
 
 DEFINE("_HOST_", "localhost");
 DEFINE("_PORT_", "3306");
-DEFINE("_USERNAME_", "oier");
-DEFINE("_DATABASE_", "Quiz");
-DEFINE("_PASSWORD_", "4258");
+DEFINE("_USERNAME_", "G22");
+DEFINE("_DATABASE_", "db_G22");
+DEFINE("_PASSWORD_", "TWTnlYm33HtAL");
 
 
 require_once 'database.php';

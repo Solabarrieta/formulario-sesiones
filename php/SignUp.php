@@ -3,9 +3,6 @@ session_start();
 
 $_SESSION['User'] = $_POST['correo'];
 $_SESSION['UserRol'] = $_POST['user'];
-
-print_r($_SESSION);
-
 /*if ($_SESSION) {
   header("Location: Layout.php");
 }*/
