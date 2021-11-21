@@ -1,13 +1,10 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['correo'])) {
+if (!isset($_SESSION) || $_SESSION['rol'] != 'admin') {
     echo '<script type="text/javascript"> alert("Debe debes ser ADMINISTRADOR para estar en esta pagina!! ");
     window.location.href="LogIn.php";
     </script>';
 }
-
-
 
 DEFINE("_HOST_", "localhost");
 DEFINE("_PORT_", "3306");
