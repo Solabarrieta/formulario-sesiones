@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <div id='page-wrap'>
   <header class='main' id='h1'>
     <?php if (!isset($_SESSION['correo'])) { ?>
