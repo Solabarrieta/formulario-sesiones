@@ -16,14 +16,10 @@ DEFINE("_DATABASE_", "db_G22");
 DEFINE("_PASSWORD_", "TWTnlYm33HtAL");
 
 
-require_once 'database.php';
-
-$message = '¿ Seguro que quiere borrar a este usuario ?';
-
-
 
 $cnx = Database::Conectar();
 
+die($_POST['email']);
 
 if (isset($_POST['email'])) {
 

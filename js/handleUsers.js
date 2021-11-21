@@ -4,11 +4,15 @@ function deleteUser(correo){
             type: "POST",
             url: '../php/DeleteUser.php',
             data: {email: correo },
-            success: ()=>{window.location.reload();}
+            success: ()=>{
+                window.location.reload();
+            }
         });
     }
 }
 
+
+//Función para devolver un array con el verbo de la acción a printear y el estado al que se queira cambiar.
 function printStatus(estado){
     let notStatus = [];
 
@@ -31,7 +35,8 @@ function changeStatus(correo, estado){
             type: "POST",
             url: '../php/ChangeStatus.php',
             data: {state: status, email: correo },
-            success: ()=> {window.location.reload();
+            success: ()=> {
+                window.location.reload();
             }
         });
     }

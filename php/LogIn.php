@@ -9,7 +9,6 @@ if (isset($_POST['botonLogin'])) {
 
   $correo = $_POST['correo'];
   $userpass = $_POST['userpass'];
-  $error = 0;
   if ($correo == "") {
     $error = 1;
   } else if ($userpass == "") {
@@ -25,40 +24,53 @@ if (isset($_POST['botonLogin'])) {
       die("Connection failed: " . mysqli_connect_error());
     }
 
-
-    $sql = "SELECT pass from users where correo = '$correo' /*and pass = '$userpass'*/";
+    //die(password_hash("admin000", PASSWORD_DEFAULT) . "    " . password_hash("admin000", PASSWORD_DEFAULT));
+    $sql = "SELECT * from users where correo = '$correo'"; //. "' and pass = '" . password_hash($userpass, PASSWORD_DEFAULT) . "'";
     $logear = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $contrasena = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
+    $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
 
-    if (is_null($contrasena)) {
+
+    if ($row == 0) {
       $error = 3;
+      die("No se ha encontrado a dicho usuario");
     } else {
-      $hash = $contrasena['pass'];
+
+      $hash = $row['pass'];
+      // error_log($userpass . " " . $hash . "\n", 3, "/tmp/error.log");
+      // die($userpass . " " . $hash);
+      //  $now = time();
+
       if (password_verify($userpass, $hash)) {
-        $sql2 = "SELECT * from users where correo = '$correo'";
+        // die(time() - $now);
+
+        // error_log((time() - $now) . "\n", 3, "/tmp/error.log");
+        /*  $sql2 = "SELECT * from users where correo = '$correo'";
         $logear = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
-        $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
+        $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array*/
 
         //Comprueba si el usuario existe
-        if (is_null($row)) {
+        /* if (is_null($row)) {
           $error = 3;
+        } else {*/
+        //Comprueba si el usuario esta baneado
+        if ($row['estado'] == 'baneado') {
+          $error = 4;
         } else {
-          //Comprueba si el usuario esta baneado
-          if ($row['estado'] == 'baneado') {
-            $error = 4;
+          if (($row['correo'] == $correo)) {
+            $_SESSION['correo'] = $correo;
+            $_SESSION['rol'] = $row['tipouser'];
+            $error = 0;
           } else {
-            if (($row['correo'] == $correo)) {
-              $_SESSION['correo'] = $correo;
-              $_SESSION['rol'] = $row['tipouser'];
-              $error = 0;
-            } else {
-              $error = 3;
-            }
+            $error = 3;
           }
         }
-      } else {
-        $error = 3;
+
+        //die("Estado 5" . $error);
       }
+      //die("estado 4");
+      /*  } else {
+        $error = 3;
+      }*/
     }
   }
 }
