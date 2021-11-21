@@ -4,9 +4,7 @@ function deleteUser(correo){
             type: "POST",
             url: '../php/DeleteUser.php',
             data: {email: correo },
-            success: ()=>{
-                window.location.reload();
-            }
+            success: ()=>{window.location.reload()}
         });
     }
 }
@@ -35,9 +33,7 @@ function changeStatus(correo, estado){
             type: "POST",
             url: '../php/ChangeStatus.php',
             data: {state: status, email: correo },
-            success: ()=> {
-                window.location.reload();
-            }
+            success: ()=>{window.location.reload()}
         });
     }
 }
