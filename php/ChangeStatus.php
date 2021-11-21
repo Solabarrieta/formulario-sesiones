@@ -18,10 +18,6 @@ DEFINE("_PASSWORD_", "TWTnlYm33HtAL");
 
 require_once 'database.php';
 
-
-
-
-
 $cnx = Database::Conectar();
 
 

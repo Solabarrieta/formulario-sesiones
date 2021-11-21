@@ -16,8 +16,6 @@ DEFINE("_PASSWORD_", "TWTnlYm33HtAL");
 
 $cnx = Database::Conectar();
 
-die($_POST['email']);
-
 if (isset($_POST['email'])) {
 
     $correo = $_POST['email'];
