@@ -3,15 +3,13 @@ session_start();
 
 $_SESSION['User'] = $_POST['correo'];
 $_SESSION['UserRol'] = $_POST['user'];
-
-print_r($_SESSION);
-
 /*if ($_SESSION) {
   header("Location: Layout.php");
 }*/
 ?>
 
 <?php
+
 //Validación del registro en el servidor
 if (isset($_POST['botonReg'])) {
   $tipoUser = "";
@@ -39,72 +37,31 @@ if (isset($_POST['botonReg'])) {
   $nuevo_nombre_imagen = md5(time() . $imagen_nombre) . '.' . $imagen_extension; //Se le da un nombre único a la imagen que se va a guardar en el servidor.
   $imagen_dir = "../images/" . $nuevo_nombre_imagen; //La base de datos guardará los directorios de las imagenes en el servidor.
 
-  if ($tipoUser == "") {
-    echo "<h3>Debes introducir una respuesta correcta.</h3>";
-    echo "<br>";
-  } else if ($correo == "") {
-    echo "<h3>Debes introducir una dirección de correo.</h3>";
-    echo "<br>";
+  $error = 0;
+
+
+  if (preg_match($er, $correo) && $tipoUser == 'prof') {
+    //No se ha introducido, cambiar por comprobar que el tipo de usuario coincide con el tipo de email...
+    $error = 1;
+  } else if ((preg_match($er2, $correo) || preg_match($er3, $correo)) && $tipoUser == 'alu') {
+    $error = 1;
   } else if (!(preg_match($er, $correo) || preg_match($er2, $correo) || preg_match($er3, $correo))) {
-    echo "<h3>Debes introducir una dirección de correo válida.</h3>";
-    echo "<br>";
-  } else if ($nom == "") {
-    echo "<h3>Debes introducir un nombre.</h3>";
-    echo "<br>";
+    //El correo no es correcto
+    $error = 2;
   } else if (strlen($nom) < 2) {
-    echo "<h3>El nombre debe tener al menos dos caracteres.</h3>";
-    echo "<br>";
-  } else if ($apell == "") {
-    echo "<h3>Debes introducir apellido/s.</h3>";
-    echo "<br>";
+    //El nombre tiene menos de dos carácteres
+    $error = 3;
   } else if (strlen($apell) < 2) {
-    echo "<h3>El apellido debe tener al menos dos caracteres.</h3>";
-    echo "<br>";
-  } else if ($userpass == "") {
-    echo "<h3>Debes introducir una contraseña.</h3>";
-    echo "<br>";
+    //El apellido tiene menos de 2 carácteres
+    $error = 4;
   } else if (strlen($userpass) < 8) {
-    echo "<h3>La contraseñad debe tener más de 8 caracteres.</h3>";
-    echo "<br>";
+    //La contraseña tiene menos de 2 carácteres
+    $error = 5;
   } else if ($repass != $userpass) {
-    echo "<h3>Las contraseñas deben ser iguales.</h3>";
-    echo "<br>";
+    //Contraseña y confirmar contraseña no coinciden
+    $error = 6;
   } else {
-    include 'ClientVerifyEnrollment.php';
-    if ($response == 'SI') {
-      //Si no ha habido ningún error, se registra al usuario
-      //Conectamos con la base de datos mysql
-      include 'DbConfig.php';
-      $conn = mysqli_connect($server, $user, $pass, $basededatos);
-      $conn->set_charset("utf8");
-
-      if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-      }
-
-      $hashpass = password_hash($userpass, PASSWORD_DEFAULT, ['cost' => 15]);
-      echo $hashpass;
-      if ($correo == 'admin@ehu.es' && $tipoUser = 'prof') {
-        $tipoUser = 'admin';
-      }
-
-      $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
-      $anadir = mysqli_query($conn, $sql);
-      if (!$anadir) {
-        echo "<h3>Se ha producido un error al intentar registrar al usuario. :(</h3>";
-        echo "<br>";
-      } else {
-
-        //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
-        move_uploaded_file($imagen_loc_tmp, $imagen_dir);
-        mysqli_close($conn);
-        echo '<script type="text/javascript"> alert("Se ha realizado el registro de forma correcta");
-                        window.location.href="LogIn.php";
-                        </script>';
-      }
-    } else {
-      echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la asignatura Sistemas Web';
-    }
+    $error = 0;
   }
 }
 ?>
@@ -182,6 +139,69 @@ if (isset($_POST['botonReg'])) {
           </tr>
         </table>
       </form>
+
+      <?php
+      if (isset($_POST['botonReg'])) {
+        if ($error == 1) {
+          echo '<h3>El correo introducido y el tipo de usuario<strong style="color: red"> NO COINCIDEN</strong></h3>';
+          echo '<h3>Si tu correo es de tipo <strong style="color: red">ESTUDIANTE</strong>, escoge tipo de usuario <strong style="color: red">ALUMNO</strong></h3>';
+          echo '<h3>Si tu correo es de tipo <strong style="color: red">PROFESOR</strong>, escoge tipo de usuario <strong style="color: red">PROFESOR</strong></h3>';
+        } else if ($error == 2) {
+          echo '<h3>Por favor, introduce un correo de la UPV/EHU</h3>';
+        } else if ($error == 3) {
+          echo '<h3>El nombre debe tener <strong style="color: red">DOS</strong> o más caracteres</h3>';
+        } else if ($error == 4) {
+          echo '<h3>El apellido debe tener <strong style="color: red">DOS</strong> o más caracteres</h3>';
+        } else if ($error == 5) {
+          echo '<h3>La contraseña  debe tener como mínimo <strong style="color: red">OCHO</strong> caracteres</h3>';
+        } else if ($error == 6) {
+          echo '<h3>Las contraseñas que has introducido <strong style="color: red">NO COINCIDEN</strong></h3>';
+        } else if ($error == 0) {
+
+          require_once 'ClientVerifyEnrollment.php';
+
+          if ($valido) {
+            //Si no ha habido ningún error, se registra al usuario
+            //Conectamos con la base de datos mysql
+            include 'DbConfig.php';
+            $conn = mysqli_connect($server, $user, $pass, $basededatos);
+            $conn->set_charset("utf8");
+
+            if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+            }
+
+            $hashpass = password_hash($userpass, PASSWORD_DEFAULT);
+
+            if ($correo == 'admin@ehu.es' && $tipoUser = 'prof') {
+              $tipoUser = 'admin';
+            }
+
+            $sql = "INSERT INTO users (tipouser, correo, nom, apell, pass, img) VALUES ('$tipoUser', '$correo', '$nom', '$apell', '$hashpass', '$imagen_dir')";
+            $anadir = mysqli_query($conn, $sql);
+            if (!$anadir) {
+              echo "<h3>Se ha producido un error al intentar registrar al usuario. :(</h3>";
+              echo "<br>";
+            } else {
+
+              //Si se puede introducir el usuario, entonces guardamos la imagen en el directorio images.
+              move_uploaded_file($imagen_loc_tmp, $imagen_dir);
+              mysqli_close($conn);
+              echo '<script type="text/javascript"> alert("Se ha realizado el registro de forma correcta");
+                            window.location.href="LogIn.php";
+                            </script>';
+            }
+          } else {
+            echo 'El correo <span style="color: red;">' . $correo . '</span> NO esta matriculado en la asignatura Sistemas Web';
+          }
+        } else {
+          echo '<script>alert("Ha ocurrido un error inesperado, por favor, intentelo de nuevo ")
+                  window.location.href="SignUp.php"
+        </script>';
+        }
+      }
+
+      ?>
 
     </div>
   </section>
