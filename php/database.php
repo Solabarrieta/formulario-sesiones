@@ -1,9 +1,4 @@
 <?php
-session_start();
-if ($_SESSION['rol'] != 'prof') {
-    header("Location: LogIn.php");
-}
-
 class Database
 {
 
