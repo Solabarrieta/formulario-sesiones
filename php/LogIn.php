@@ -25,23 +25,18 @@ if (isset($_POST['botonLogin'])) {
     }
 
 
-    $sql = "SELECT pass from users where correo = '$correo' /*and pass = '$userpass'*/";
+    $sql = "SELECT * from users where correo = '$correo' /*and pass = '$userpass'*/";
     $logear = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $contrasena = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
+    $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
 
     if (is_null($contrasena)) {
       $error = 3;
     } else {
-      if (password_verify($userpass, $contrasena['pass'])) {
-        $sql2 = "SELECT * from users where correo = '$correo'";
-        $logear = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
-        $row = mysqli_fetch_array($logear, MYSQLI_ASSOC); //Lo convertimos a array
-
+      $hash = $row['pass'];
+      if (password_verify($userpass, $hash)) {
         if (is_null($row)) {
           $error = 3;
         } else {
-          //Logear al usuario
-          //printf ("%s (%s)\n", $row["correo"], $row["pass"]);
           if (($row['correo'] == $correo)) {
             $_SESSION['correo'] = $correo;
             $_SESSION['rol'] = $row['tipouser'];
